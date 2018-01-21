@@ -14,11 +14,13 @@ if (typeof web3 !== 'undefined') {
   web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 }
 
+let CONTRACT_ADDRESS = process.argv[2]
+
 let hypercertsSetup =
   {
     initType: 2,
     ethereumRPC: 'http://localhost:8545',
-    contractAddress: '0xe109e7367f71def8a8f138eaea351336fa840b82' // rinkeby
+    contractAddress: CONTRACT_ADDRESS // rinkeby
   }
 
 // "0xa17e3264437fda8bc6c92606dcc86bc0787f8fb09a2a53457d9256ef5d0e37b1"

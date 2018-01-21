@@ -1,0 +1,11 @@
+- name: create tests repo dir
+  raw: mkdir tests
+
+- name: clone repo
+  command: chdir=/home/ubuntu/tests git clone https://github.com/joaosantos15/dclaims-scale-tests.git
+
+- name: install tests
+  command: chdir=/home/ubuntu/tests/dclaims-scale-tests/tests npm install
+
+- name: install hc-core
+  command: chdir=/home/ubuntu/tests/dclaims-scale-tests/hypercerts-core/src npm install

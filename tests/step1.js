@@ -14,7 +14,13 @@ if (typeof web3 !== 'undefined') {
   web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 }
 
-let CONTRACT_ADDRESS = process.argv[2]
+let CONTRACT_ADDRESS
+
+if (process.argv[2] === undefined) {
+  CONTRACT_ADDRESS = '0xe109e7367f71def8a8f138eaea351336fa840b82'
+} else {
+  CONTRACT_ADDRESS = process.argv[2]
+}
 
 let hypercertsSetup =
   {

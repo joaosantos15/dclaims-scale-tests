@@ -1,0 +1,20 @@
+{
+  "name": "plot-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hypercerts-core": "^1.3.4",
+    "hypercerts-news-claims": "^1.0.0",
+    "nonce": "^1.0.4",
+    "randomstring": "^1.1.5",
+    "simple-statistics": "^5.2.1",
+    "sleep": "^5.1.1"
+  }
+}

@@ -5,7 +5,7 @@ var Web3 = require('web3')
 var claimsGenerator = require('./randomClaimsGenerator.js')
 var articleIdsList = require('./articlesList.js')
 
-const NUMBER_OF_CLAIM = 100
+const NUMBER_OF_CLAIM = 10
 
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider)

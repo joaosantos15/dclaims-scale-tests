@@ -102,7 +102,7 @@ function sendValues (value) {
       }
     })
 
-    xhr.open('GET', 'http://localhost:3000/?a=' + value)
+    xhr.open('GET', 'http://turbina.gsd.inesc-id.pt:3000/?a=' + value)
     xhr.setRequestHeader('cache-control', 'no-cache')
 
     xhr.send(data)

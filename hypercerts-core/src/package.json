@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "buffer": "^5.0.8",
-    "ipfs-api": "^17.2.4",
+    "ipfs-api": "^17.3.0",
     "promise": "^8.0.1",
     "sleep": "^5.1.1",
     "solc": "^0.4.19",

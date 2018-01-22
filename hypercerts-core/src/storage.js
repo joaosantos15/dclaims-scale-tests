@@ -51,9 +51,8 @@ exports.getClaimsListFromIpfs = function (key) {
   return new Promise(function (resolve, reject) {
     getClaimsList(key).then(metaList => {
       let pr = []
-      let claimsList = {}
       for (let i = 0; i < metaList.length; i++) {
-        stopWatch.mark('core-get-claim-from-ipfs-start' + multihash.substring(1, 6))
+        stopWatch.mark('core-get-claim-from-ipfs-start' + metaList[i].ipfsLink.substring(1, 6))
         pr.push(getFileFromIPFS(metaList[i].ipfsLink))
       }
       Promise.all(pr).then(resolve)
@@ -185,3 +184,4 @@ exports.getItem = function (key) {
     })
   })
 }
+

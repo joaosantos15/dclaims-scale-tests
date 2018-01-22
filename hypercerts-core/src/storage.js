@@ -29,28 +29,31 @@ exports.init = function (type) {
   })
 }
 
+// -- USED
 exports.addItem = function (key, item) {
   console.log('Adding item')
   console.log('Key: ' + key + ' Item: ' + item.toString())
-  stopWatch.mark('core-adding-claim-to-ipfs-start' + key.substring(1, 5))
+  stopWatch.mark('core-addClaim-start' + key.substring(1, 6))
   return new Promise(function (resolve, reject) {
     addClaimToIPFS(Buffer.from(JSON.stringify(item))).then(value => {
-      stopWatch.mark('core-adding-claim-to-ipfs-end' + key.substring(1, 5))
-
       issueClaim(key, value).then(value2 => {
         // resolve([key, item])
+        stopWatch.mark('core-addClaim-stop' + key.substring(1, 6))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-addClaim' + key.substring(1, 6), 'core-addClaim-start' + key.substring(1, 6), 'core-addClaim-stop' + key.substring(1, 6))
         resolve(value2)
       })
     })
   })
 }
 
+// -- USED
 exports.getClaimsListFromIpfs = function (key) {
   return new Promise(function (resolve, reject) {
     getClaimsList(key).then(metaList => {
       let pr = []
       let claimsList = {}
       for (let i = 0; i < metaList.length; i++) {
+        stopWatch.mark('core-get-claim-from-ipfs-start' + multihash.substring(1, 6))
         pr.push(getFileFromIPFS(metaList[i].ipfsLink))
       }
       Promise.all(pr).then(resolve)
@@ -76,6 +79,7 @@ function getClaimsList (key) {
     Ethereum.getClaimsListCount(key).then(value => {
       let ps = []
       for (let i = 0; i < value; i++) {
+        stopWatch.mark('core-eth-getIDList-start' + key.substring(1, 6))
         ps.push(Ethereum.getClaim(key, i))
       }
       Promise.all(ps)
@@ -94,6 +98,7 @@ function getClaimsList (key) {
   })
 }
 
+// -- USED
 function issueClaim (key, item) {
   return new Promise(function (resolve, reject) {
     Ethereum.issueClaim(key, item).then(function (txid) {
@@ -134,7 +139,7 @@ function addClaimToIPFS (claimsArrayBuffer) {
       } else {
         console.log('added_to_ipfs')
         stopWatch.mark('core-add-claim-to-ipfs-end' + claimsArrayBuffer.toString('utf8'))
-        stopWatch.measure('core-add-claim-to-ipfs' + claimsArrayBuffer.toString('utf8'))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-add-claim-to-ipfs' + claimsArrayBuffer.toString('utf8'))
         resolve(result[0].hash)
       }
     })
@@ -144,7 +149,7 @@ function addClaimToIPFS (claimsArrayBuffer) {
 function getFileFromIPFS (multihash) {
   return new Promise(function (resolve, reject) {
     try {
-      stopWatch.mark('core-get-claim-from-ipfs-start' + multihash.substring(1, 6))
+      stopWatch.mark('core-get-claim-from-ipfs-start-specific' + multihash.substring(1, 6))
       ipfs.files.cat(multihash, function (err, file) {
         if (err) {
           console.log('Error connecting to IPFS. Check daemon is running')
@@ -153,7 +158,8 @@ function getFileFromIPFS (multihash) {
         try {
           var result = JSON.parse(file.toString('utf8'))
           stopWatch.mark('core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
-          stopWatch.measure('core-get-claim-from-ipfs' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-start' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
+          stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-get-claim-from-ipfs-specific' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-start-specific' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
+          stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-get-claim-from-ipfs' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-start' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
           resolve(result)
         } catch (err) {
           console.log('Error parsing JSON from a claim.')

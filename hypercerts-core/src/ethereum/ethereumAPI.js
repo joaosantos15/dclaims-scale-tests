@@ -1,6 +1,7 @@
 exports = module.exports
 
 var HypercertsInstance = null
+var stopWatch = require('timer-timer')
 
 const EthereumConnector = require('./ethereum-connector.js')
 // const CONTRACT_ADDRESS = '0x01ffefba4281b08a4f66b77359c244ba665bbbf2'
@@ -77,9 +78,12 @@ exports.issueClaim = function (key, ipfsLink) {
 
 exports.getClaimsListCount = function (key) {
   return new Promise(function (resolve, reject) {
+    stopWatch.mark('core-eth-getClaimsCount-start' + key.substring(1, 6))
     HypercertsInstance.getClaimsListSize.call(key, function (error, result) {
       if (!error) {
         // console.log(result)
+        stopWatch.mark('core-eth-getClaimsCount-stop' + key.substring(1, 6))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-eth-getClaimsCount' + key.substring(1, 6), 'core-eth-getClaimsCount-start' + key.substring(1, 6), 'core-eth-getClaimsCount-stop' + key.substring(1, 6))
         resolve(result)
       } else {
         console.error(error)
@@ -97,9 +101,13 @@ exports.getUserId = function () {
 
 exports.getClaim = function (key, index) {
   return new Promise(function (resolve, reject) {
+    stopWatch.mark('core-eth-getIDList-specific-start' + key.substring(1, 6))
     HypercertsInstance.getClaim.call(key, index, function (error, result) {
       if (!error) {
         // console.log(result)
+        stopWatch.mark('core-eth-getIDList-stop' + key.substring(1, 6))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-eth-getIDList' + key.substring(1, 6), 'core-eth-getIDList-start' + key.substring(1, 6), 'core-eth-getIDList-stop' + key.substring(1, 6))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-eth-getIDList-specific' + key.substring(1, 6), 'core-eth-getIDList-specific-start' + key.substring(1, 6), 'core-eth-getIDList-stop' + key.substring(1, 6))
         resolve(result)
       } else {
         console.error(error)

@@ -5,12 +5,15 @@ var Web3 = require('web3')
 var claimsGenerator = require('./randomClaimsGenerator.js')
 var articleIdsList = require('./articlesList.js')
 
-const NUMBER_OF_CLAIM = 5
+var stopWatch = require('timer-timer')
+stopWatch.init()
+
+const NUMBER_OF_CLAIM = 20
 
 let CONTRACT_ADDRESS
 
 if (process.argv[2] === undefined) {
-  CONTRACT_ADDRESS = '0x839d642c4047ab336a4bd6809af916c6e202bff6'
+  CONTRACT_ADDRESS = '0xa3c511b7958aac6dd2c8275bac60663a0968301c'
 } else {
   CONTRACT_ADDRESS = process.argv[2]
 }

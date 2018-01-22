@@ -5,27 +5,36 @@ var Web3 = require('web3')
 var claimsGenerator = require('./randomClaimsGenerator.js')
 var articleIdsList = require('./articlesList.js')
 
-const NUMBER_OF_CLAIM = 10
+const NUMBER_OF_CLAIM = 5
+
+let CONTRACT_ADDRESS
+
+if (process.argv[2] === undefined) {
+  CONTRACT_ADDRESS = '0x839d642c4047ab336a4bd6809af916c6e202bff6'
+} else {
+  CONTRACT_ADDRESS = process.argv[2]
+}
+
+// http://146.193.41.153:8545
+let RPC_ADDRESS
+
+if (process.argv[3] === undefined) {
+  RPC_ADDRESS = 'http://localhost:8545'
+} else {
+  RPC_ADDRESS = process.argv[3]
+}
 
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider)
 } else {
   // set the provider you want from Web3.providers
-  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-}
-
-let CONTRACT_ADDRESS
-
-if (process.argv[2] === undefined) {
-  CONTRACT_ADDRESS = '0xe109e7367f71def8a8f138eaea351336fa840b82'
-} else {
-  CONTRACT_ADDRESS = process.argv[2]
+  web3 = new Web3(new Web3.providers.HttpProvider(RPC_ADDRESS))
 }
 
 let hypercertsSetup =
   {
     initType: 2,
-    ethereumRPC: 'http://localhost:8545',
+    ethereumRPC: RPC_ADDRESS,
     contractAddress: CONTRACT_ADDRESS // rinkeby
   }
 

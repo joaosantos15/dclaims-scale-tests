@@ -1,6 +1,7 @@
 'use strict'
 var exports = module.exports = {}
 const Ethereum = require('./ethereum/ethereumAPI.js')
+var stopWatch = require('timer-timer')
 let ipfsAPI
 let ipfs
 
@@ -31,11 +32,11 @@ exports.init = function (type) {
 exports.addItem = function (key, item) {
   console.log('Adding item')
   console.log('Key: ' + key + ' Item: ' + item.toString())
-  // window.performance.mark('core-adding-claim-to-ipfs-start' + key.substring(1, 5))
+  stopWatch.mark('core-adding-claim-to-ipfs-start' + key.substring(1, 5))
   return new Promise(function (resolve, reject) {
     addClaimToIPFS(Buffer.from(JSON.stringify(item))).then(value => {
-      // window.performance.mark('core-adding-claim-to-ipfs-end' + key.substring(1, 5))
-      // window.performance.measure('core-adding-claim-to-ipfs-' + key.substring(1, 5))
+      stopWatch.mark('core-adding-claim-to-ipfs-end' + key.substring(1, 5))
+
       issueClaim(key, value).then(value2 => {
         // resolve([key, item])
         resolve(value2)
@@ -125,25 +126,25 @@ function getLinkFromRegistry (key) {
 
 function addClaimToIPFS (claimsArrayBuffer) {
   return new Promise(function (resolve, reject) {
-    // window.performance.mark('core-add-claim-to-ipfs-start' + claimsArrayBuffer.toString('utf8'))
+    stopWatch.mark('core-add-claim-to-ipfs-start' + claimsArrayBuffer.toString('utf8'))
     ipfs.files.add(claimsArrayBuffer, function (err, result) {
       if (err) {
         // reject('something went wrong adding the file')
         reject(err)
       } else {
         console.log('added_to_ipfs')
-        // window.performance.mark('core-add-claim-to-ipfs-end' + claimsArrayBuffer.toString('utf8'))
-        // window.performance.measure('core-add-claim-to-ipfs' + claimsArrayBuffer.toString('utf8'))
+        stopWatch.mark('core-add-claim-to-ipfs-end' + claimsArrayBuffer.toString('utf8'))
+        stopWatch.measure('core-add-claim-to-ipfs' + claimsArrayBuffer.toString('utf8'))
         resolve(result[0].hash)
       }
     })
   })
 }
-
+// -> here <-
 function getFileFromIPFS (multihash) {
   return new Promise(function (resolve, reject) {
     try {
-      // window.performance.mark('core-get-claim-from-ipfs-start' + multihash.substring(1, 6))
+      stopWatch.mark('core-get-claim-from-ipfs-start' + multihash.substring(1, 6))
       ipfs.files.cat(multihash, function (err, file) {
         if (err) {
           console.log('Error connecting to IPFS. Check daemon is running')
@@ -151,8 +152,8 @@ function getFileFromIPFS (multihash) {
         }
         try {
           var result = JSON.parse(file.toString('utf8'))
-          // window.performance.mark('core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
-          // window.performance.measure('core-get-claim-from-ipfs' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-start' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
+          stopWatch.mark('core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
+          stopWatch.measure('core-get-claim-from-ipfs' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-start' + multihash.substring(1, 6), 'core-get-claim-from-ipfs-stop' + multihash.substring(1, 6))
           resolve(result)
         } catch (err) {
           console.log('Error parsing JSON from a claim.')

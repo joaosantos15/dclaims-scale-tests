@@ -75,15 +75,19 @@ Hypercerts.init(hypercertsSetup).then(value => {
 
 function fetchClaimsFromArticle () {
   return new Promise(function (resolve, reject) {
-    console.log('fetching one...')
-    let articleId = articlesList[Math.floor(Math.random() * articlesList.length)]
-    stopWatch.mark('get-claims-count-start-' + articleId.substring(1, 5))
-    Hypercerts.getClaimsByIndex(articleId).then(value => {
-      stopWatch.mark('get-claims-count-stop-' + articleId.substring(1, 5))
-      stopWatch.measure('ts-' + new Date().getTime().toString() + '-get-claims-count-' + articleId.substring(1, 5), 'get-claims-count-start-' + articleId.substring(1, 5), 'get-claims-count-stop-' + articleId.substring(1, 5))
-      console.log('finished fetching...')
-      resolve(value)
-    })
+    try {
+      console.log('fetching one...')
+      let articleId = articlesList[Math.floor(Math.random() * articlesList.length)]
+      stopWatch.mark('get-claims-count-start-' + articleId.substring(1, 5))
+      Hypercerts.getClaimsByIndex(articleId).then(value => {
+        stopWatch.mark('get-claims-count-stop-' + articleId.substring(1, 5))
+        stopWatch.measure('ts-' + new Date().getTime().toString() + '-get-claims-count-' + articleId.substring(1, 5), 'get-claims-count-start-' + articleId.substring(1, 5), 'get-claims-count-stop-' + articleId.substring(1, 5))
+        console.log('finished fetching...')
+        resolve(value)
+      })
+    } catch (err) {
+      console.log('Failed at fetching claims...')
+    }
   })
 }
 
@@ -111,11 +115,15 @@ function sendValues (value) {
 }
 
 function phoneHome () {
-  let cena = stopWatch.dump()
-  let b = JSON.stringify(cena)
+  try {
+    let cena = stopWatch.dump()
+    let b = JSON.stringify(cena)
 
   // console.log(b)
-  sendValues(b).then(console.log)
+    sendValues(b).then(console.log)
+  } catch (err) {
+    console.log('Failed at uploading to server')
+  }
 }
 
-setTimeout(phoneHome, END_AT_MINUTE * 60 * 1000)
+setInterval(phoneHome, END_AT_MINUTE * 60 * 1000)

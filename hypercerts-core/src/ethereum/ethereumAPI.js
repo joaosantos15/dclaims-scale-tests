@@ -1,7 +1,8 @@
 exports = module.exports
 
 var HypercertsInstance = null
-var stopWatch = require('timer-timer')
+// var stopWatch = require('timer-timer')
+var stopWatch = require('../../../stop-watch/index.js')
 
 const EthereumConnector = require('./ethereum-connector.js')
 // const CONTRACT_ADDRESS = '0x01ffefba4281b08a4f66b77359c244ba665bbbf2'

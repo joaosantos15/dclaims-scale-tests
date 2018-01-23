@@ -1,7 +1,8 @@
 'use strict'
 var exports = module.exports = {}
 const Ethereum = require('./ethereum/ethereumAPI.js')
-var stopWatch = require('timer-timer')
+// var stopWatch = require('timer-timer')
+var stopWatch = require('../../stop-watch/index.js')
 let ipfsAPI
 let ipfs
 
@@ -184,4 +185,3 @@ exports.getItem = function (key) {
     })
   })
 }
-

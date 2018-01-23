@@ -6,7 +6,7 @@ var Web3 = require('web3')
 var claimsGenerator = require('./randomClaimsGenerator.js')
 var articleIdsList = require('./articlesList.js')
 
-var stopWatch = require('timer-timer')
+var stopWatch = require('../stop-watch/index.js')
 stopWatch.init()
 
 const NUMBER_OF_CLAIMS = 20

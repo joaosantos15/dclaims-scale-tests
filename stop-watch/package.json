@@ -1,0 +1,13 @@
+{
+  "name": "timer-timer",
+  "version": "1.3.0",
+  "description": "Measures node.js execution times. Similar to JS window.performance",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joao Santos",
+  "license": "ISC"
+}

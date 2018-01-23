@@ -1,7 +1,7 @@
 var Web3 = require('web3')
 var articleIdsList = require('./articlesList.js')
 const Hypercerts = require('../hypercerts-core/src/hc-core.js') // testing
-var stopWatch = require('timer-timer')
+var stopWatch = require('../stop-watch/index.js')
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 
 stopWatch.init()

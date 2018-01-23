@@ -8,7 +8,7 @@ var articleIdsList = require('./articlesList.js')
 var stopWatch = require('timer-timer')
 stopWatch.init()
 
-const NUMBER_OF_CLAIM = 20
+const NUMBER_OF_CLAIMS = 20
 
 let CONTRACT_ADDRESS
 
@@ -46,7 +46,7 @@ let hypercertsSetup =
 var idList = articleIdsList.list
 
 Hypercerts.init(hypercertsSetup).then(value => {
-  for (let i = 0; i < NUMBER_OF_CLAIM; i++) {
+  for (let i = 0; i < NUMBER_OF_CLAIMS; i++) {
     let thisClaim = claimsGenerator.generateOne()
     thisClaim.claim.id = idList[Math.floor(Math.random() * idList.length)]
     let articleId = thisClaim.claim.id

@@ -1,6 +1,6 @@
 Web3 = require('web3')
-// web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-web3 = new Web3(new Web3.providers.HttpProvider('http://146.193.41.153:8545'))
+web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+// web3 = new Web3(new Web3.providers.HttpProvider('http://146.193.41.153:8545'))
 var ipfsAPI = require('ipfs-api')
 var ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5001')
 

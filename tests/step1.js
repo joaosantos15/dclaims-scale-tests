@@ -1,5 +1,5 @@
 // const Hypercerts = require('hypercerts-core')
-// new version
+// hellooo
 var fs = require('fs')
 const Hypercerts = require('../hypercerts-core/src/hc-core.js') // testing
 var Web3 = require('web3')

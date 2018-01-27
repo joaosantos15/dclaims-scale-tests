@@ -8,6 +8,8 @@ stopWatch.init()
 
 var fs = require('fs')
 
+const instanceId = new Date().getTime().toString
+
 global.collectedData = []
 
 let RPC_ADDRESS
@@ -114,13 +116,31 @@ function sendValues (value) {
   })
 }
 
-function phoneHome () {
+async function saveData (data) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('test-raw-values/' + instanceId + '-log' + new Date().getTime().toString() + '.json', data, (err) => {
+      if (err) {
+        console.log(err)
+        reject(err)
+      }
+      console.log('Data written to file')
+      resolve(true)
+    })
+  })
+}
+
+async function phoneHome () {
   try {
     let cena = stopWatch.dump()
     let b = JSON.stringify(cena)
-
+    await saveData(b).catch(function (error) {
+      console.log(error)
+    })
   // console.log(b)
-    sendValues(b).then(console.log)
+    await sendValues(b).then(console.log).catch(function (error) {
+      console.log(error)
+    })
+    stopWatch.clear()
   } catch (err) {
     console.log('Failed at uploading to server')
   }

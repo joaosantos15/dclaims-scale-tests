@@ -6,3 +6,4 @@ web3.eth.getBlock('latest').number
 
 # run steps in test host
 node step1.js 0xaa74cdadc21c05cc933f69d4746efb720cfb3ed1 http://turbina.gsd.inesc-id.pt:8545
+node step2.js 0xaa74cdadc21c05cc933f69d4746efb720cfb3ed1 http://turbina.gsd.inesc-id.pt:8545 2 10

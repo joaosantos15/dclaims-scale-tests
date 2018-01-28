@@ -8,7 +8,7 @@ stopWatch.init()
 
 var fs = require('fs')
 
-const instanceId = new Date().getTime().toString
+const instanceId = new Date().getTime().toString()
 
 global.collectedData = []
 

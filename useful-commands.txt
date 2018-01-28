@@ -1,0 +1,8 @@
+# test web3
+Web3 = require('web3')
+web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+web3.net.peerCount
+web3.eth.getBlock('latest').number
+
+# run steps in test host
+node step1.js 0xaa74cdadc21c05cc933f69d4746efb720cfb3ed1 http://turbina.gsd.inesc-id.pt:8545

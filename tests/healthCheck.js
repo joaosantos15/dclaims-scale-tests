@@ -1,8 +1,8 @@
 Web3 = require('web3')
 
-if (process.argv[2] === 'turbina') {
+if (process.argv[3] === 'turbina') {
   web3 = new Web3(new Web3.providers.HttpProvider('http://146.193.41.153:8545'))
-} else{
+} else {
   web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 }
 // web3 = new Web3(new Web3.providers.HttpProvider('http://146.193.41.153:8545'))

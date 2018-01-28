@@ -9,7 +9,7 @@ var articleIdsList = require('./articlesList.js')
 var stopWatch = require('../stop-watch/index.js')
 stopWatch.init()
 
-const NUMBER_OF_CLAIMS = 20
+const NUMBER_OF_CLAIMS = 5
 
 let CONTRACT_ADDRESS
 

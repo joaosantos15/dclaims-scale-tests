@@ -10,6 +10,12 @@ var fs = require('fs')
 
 const instanceId = new Date().getTime().toString()
 
+var dir = './test-raw-values'
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir)
+}
+
 global.collectedData = []
 
 let RPC_ADDRESS
@@ -118,7 +124,7 @@ function sendValues (value) {
 
 async function saveData (data) {
   return new Promise((resolve, reject) => {
-    fs.writeFile('test-raw-values/' + instanceId + '-log' + new Date().getTime().toString() + '.json', data, (err) => {
+    fs.writeFile(dir + '/' + instanceId + '-log' + new Date().getTime().toString() + '.json', data, (err) => {
       if (err) {
         console.log(err)
         reject(err)

@@ -143,9 +143,9 @@ async function phoneHome () {
       console.log(error)
     })
   // console.log(b)
-    await sendValues(b).then(console.log).catch(function (error) {
-      console.log(error)
-    })
+    // await sendValues(b).then(console.log).catch(function (error) {
+    //  console.log(error)
+    // })
     stopWatch.clear()
   } catch (err) {
     console.log('Failed at uploading to server')

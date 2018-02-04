@@ -37,6 +37,10 @@ exports.getClaimsByIndex = function (claimIndex) {
     Storage.getClaimsListFromIpfs(claimIndex).then(value => {
       var claimsJSON = {}
       claimsJSON.claimsList = value
+      stopWatch.mark('core-get-all-claims-eth-and-ipfs-stop' + claimIndex)
+      stopWatch.mark('core-get-all-claims-from-ipfs-stop-' + claimIndex)
+      stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-get-all-claims-eth-and-ipfs-', 'core-get-all-claims-eth-and-ipfs-start' + claimIndex, 'core-get-all-claims-eth-and-ipfs-stop' + claimIndex)
+      stopWatch.measure('ts-' + new Date().getTime().toString() + 'core-get-all-claims-from-ipfs', 'core-get-all-claims-from-ipfs-start-' + claimIndex, 'core-get-all-claims-from-ipfs-stop-' + claimIndex)
       fulfill(claimsJSON)
     })
   })
